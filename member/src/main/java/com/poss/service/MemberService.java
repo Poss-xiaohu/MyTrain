@@ -7,6 +7,7 @@ import com.poss.exception.BusinessException;
 import com.poss.exception.BusinessExceptionEnum;
 import com.poss.mapper.MemberMapper;
 import com.poss.req.MemberRegisterReq;
+import com.poss.util.SnowUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +42,7 @@ public class MemberService {
         }
 
         Member member = new Member();
-        member.setId(System.currentTimeMillis());
+        member.setId(SnowUtil.getSnowflakeNextId());
         member.setMobile(memberRegisterReq.getMobile());
         memberMapper.insert(member);
         return member.getId();
