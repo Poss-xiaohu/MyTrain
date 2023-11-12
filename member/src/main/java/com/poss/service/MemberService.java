@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.poss.domain.Member;
 import com.poss.domain.MemberExample;
 import com.poss.mapper.MemberMapper;
+import com.poss.req.MemberRegisterReq;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -27,10 +28,10 @@ public class MemberService {
     }
 
 
-    public long register(String mobile) {
+    public long register(MemberRegisterReq memberRegisterReq) {
 
         MemberExample memberExample = new MemberExample();
-        memberExample.createCriteria().andMobileEqualTo(mobile);
+        memberExample.createCriteria().andMobileEqualTo(memberRegisterReq.getMobile());
         List<Member> list = memberMapper.selectByExample(memberExample);
         
         if(CollUtil.isNotEmpty(list)){
@@ -39,7 +40,7 @@ public class MemberService {
 
         Member member = new Member();
         member.setId(System.currentTimeMillis());
-        member.setMobile(mobile);
+        member.setMobile(memberRegisterReq.getMobile());
         memberMapper.insert(member);
         return member.getId();
     }
