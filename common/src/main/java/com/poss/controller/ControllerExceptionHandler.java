@@ -34,7 +34,7 @@ public class ControllerExceptionHandler {
         //     throw e;
         // }
         CommonResp commonResp = new CommonResp();
-        LOG.error("系统异常：", e);
+        LOG.error("系统异常：{}", e.getMessage());
         commonResp.setSuccess(false);
         commonResp.setMessage("系统出现异常，请联系管理员");
         return commonResp;
@@ -44,7 +44,7 @@ public class ControllerExceptionHandler {
     @ResponseBody
     public CommonResp exceptionHandler(BusinessException e){
         CommonResp commonResp = new CommonResp();
-        LOG.error("业务异常：", e);
+        LOG.error("业务异常：{}", e.getE().getDesc());
         commonResp.setSuccess(false);
         commonResp.setMessage(e.getE().getDesc());
         return commonResp;
