@@ -3,6 +3,8 @@ package com.poss.service;
 import cn.hutool.core.collection.CollUtil;
 import com.poss.domain.Member;
 import com.poss.domain.MemberExample;
+import com.poss.exception.BusinessException;
+import com.poss.exception.BusinessExceptionEnum;
 import com.poss.mapper.MemberMapper;
 import com.poss.req.MemberRegisterReq;
 import jakarta.annotation.Resource;
@@ -35,7 +37,7 @@ public class MemberService {
         List<Member> list = memberMapper.selectByExample(memberExample);
         
         if(CollUtil.isNotEmpty(list)){
-            throw new RuntimeException("手机号已经注册！");
+            throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_EXIST);
         }
 
         Member member = new Member();
