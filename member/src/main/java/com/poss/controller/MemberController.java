@@ -3,6 +3,7 @@ package com.poss.controller;
 import com.poss.service.MemberService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,5 +27,10 @@ public class MemberController {
 //        commonResp.setContent(count);
 //        return commonResp;
         return count;
+    }
+    
+    @PostMapping("/register")
+    public long register(String mobile){
+        return memberService.register(mobile);
     }
 }
