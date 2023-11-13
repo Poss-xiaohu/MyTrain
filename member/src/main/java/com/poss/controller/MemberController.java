@@ -1,8 +1,10 @@
 package com.poss.controller;
 
+import com.poss.req.MemberLoginReq;
 import com.poss.req.MemberRegisterReq;
 import com.poss.req.MemberSendCodeReq;
 import com.poss.resp.CommonResp;
+import com.poss.resp.MemberLoginResp;
 import com.poss.service.MemberService;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
@@ -28,9 +30,9 @@ public class MemberController {
         commonResp.setContent(count);
         return commonResp;
     }
-    
+
     @PostMapping("/register")
-    public CommonResp<Long> register(@Valid MemberRegisterReq memberRegisterReq){
+    public CommonResp<Long> register(@Valid MemberRegisterReq memberRegisterReq) {
         long register = memberService.register(memberRegisterReq);
         return new CommonResp<>(register);
     }
@@ -39,5 +41,11 @@ public class MemberController {
     public CommonResp<Long> sendCode(@Valid @RequestBody MemberSendCodeReq req) {
         memberService.sendCode(req);
         return new CommonResp<>();
+    }
+
+    @PostMapping("/login")
+    public CommonResp<MemberLoginResp> login(@Valid @RequestBody MemberLoginReq req) {
+        MemberLoginResp resp = memberService.login(req);
+        return new CommonResp<>(resp);
     }
 }

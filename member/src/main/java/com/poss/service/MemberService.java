@@ -1,5 +1,6 @@
 package com.poss.service;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.poss.domain.Member;
@@ -7,8 +8,11 @@ import com.poss.domain.MemberExample;
 import com.poss.exception.BusinessException;
 import com.poss.exception.BusinessExceptionEnum;
 import com.poss.mapper.MemberMapper;
+import com.poss.req.MemberLoginReq;
 import com.poss.req.MemberRegisterReq;
 import com.poss.req.MemberSendCodeReq;
+import com.poss.resp.MemberLoginResp;
+import com.poss.util.JwtUtil;
 import com.poss.util.SnowUtil;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
@@ -79,6 +83,27 @@ public class MemberService {
 
         // 对接短信通道，发送短信
         LOG.info("对接短信通道");
+    }
+
+    public MemberLoginResp login(MemberLoginReq req) {
+        String mobile = req.getMobile();
+        String code = req.getCode();
+        Member memberDB = selectByMobile(mobile);
+
+        // 如果手机号不存在，则插入一条记录
+        if (ObjectUtil.isNull(memberDB)) {
+            throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_NOT_EXIST);
+        }
+
+        // 校验短信验证码
+        if (!"8888".equals(code)) {
+            throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_CODE_ERROR);
+        }
+
+        MemberLoginResp memberLoginResp = BeanUtil.copyProperties(memberDB, MemberLoginResp.class);
+        String token = JwtUtil.createToken(memberLoginResp.getId(), memberLoginResp.getMobile());
+        memberLoginResp.setToken(token);
+        return memberLoginResp;
     }
 
     private Member selectByMobile(String mobile) {
