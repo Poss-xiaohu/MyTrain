@@ -38,7 +38,7 @@ public class ServerGenerator {
         Node table = document.selectSingleNode("//table");
         System.out.println(table);
         Node tableName = table.selectSingleNode("@tableName");
-        Node domainObjectName = table.selectSingleNode("@domainObjectName");
+        Node domainObjectName = table.selectSingleNode("@domainObjectName"); 
         System.out.println(tableName.getText() + "/" + domainObjectName.getText());
 
         // 为DbUtil设置数据源
