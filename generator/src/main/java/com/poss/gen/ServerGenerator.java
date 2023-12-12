@@ -16,6 +16,7 @@ import java.util.*;
 public class ServerGenerator {
     static boolean readOnly = false;
     static String vuePath = "admin/src/views/main/";
+//    static String vuePath = "admin/src/views/main/station.vue";
     static String serverPath = "[module]/src/main/java/com/poss/";
     static String pomPath = "generator/pom.xml";
     static String module = "";
