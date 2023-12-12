@@ -3,8 +3,11 @@ package com.poss.mapper;
 import com.poss.domain.Station;
 import com.poss.domain.StationExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface StationMapper {
     long countByExample(StationExample example);
 
