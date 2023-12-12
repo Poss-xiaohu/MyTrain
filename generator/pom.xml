@@ -19,7 +19,19 @@
     
     <dependencies>
 
-        <!-- https://mvnrepository.com/artifact/jaxen/jaxen -->
+        <dependency>
+            <groupId>com.poss</groupId>
+            <artifactId>member</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/jaxen/jaxen --> 
         <dependency>
             <groupId>jaxen</groupId>
             <artifactId>jaxen</artifactId>

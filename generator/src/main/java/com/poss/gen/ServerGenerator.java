@@ -16,7 +16,7 @@ import java.util.*;
 public class ServerGenerator {
     static boolean readOnly = false;
     static String vuePath = "admin/src/views/main/";
-    static String serverPath = "[module]/src/main/java/com/jiawa/train/[module]/";
+    static String serverPath = "[module]/src/main/java/com/poss/";
     static String pomPath = "generator/pom.xml";
     static String module = "";
     // static {
@@ -38,7 +38,7 @@ public class ServerGenerator {
         Node table = document.selectSingleNode("//table");
         System.out.println(table);
         Node tableName = table.selectSingleNode("@tableName");
-        Node domainObjectName = table.selectSingleNode("@domainObjectName"); 
+        Node domainObjectName = table.selectSingleNode("@domainObjectName");
         System.out.println(tableName.getText() + "/" + domainObjectName.getText());
 
         // 为DbUtil设置数据源
@@ -92,7 +92,7 @@ public class ServerGenerator {
         String Target = target.substring(0, 1).toUpperCase() + target.substring(1);
         String fileName = toPath + Domain + Target + ".java";
         System.out.println("开始生成：" + fileName);
-        FreemarkerUtil.generator(fileName, param);
+        FreemarkerUtil.generator(fileName, param); 
     }
 
     private static void genVue(String do_main, Map<String, Object> param) throws IOException, TemplateException {
@@ -105,7 +105,7 @@ public class ServerGenerator {
 
     private static String getGeneratorPath() throws DocumentException {
         SAXReader saxReader = new SAXReader();
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("pom", "http://maven.apache.org/POM/4.0.0");
         saxReader.getDocumentFactory().setXPathNamespaceURIs(map);
         Document document = saxReader.read(pomPath);
