@@ -6,6 +6,7 @@ import com.poss.resp.PageResp;
 import com.poss.req.TrainQueryReq;
 import com.poss.req.TrainSaveReq;
 import com.poss.resp.TrainQueryResp;
+import com.poss.service.TrainSeatService;
 import com.poss.service.TrainService;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
@@ -19,6 +20,8 @@ public class TrainAdminController {
 
     @Resource
     private TrainService trainService;
+    @Resource
+    private TrainSeatService trainSeatService;
 
     @PostMapping("/save")
     public CommonResp<Object> save(@Valid @RequestBody TrainSaveReq req) {
@@ -44,9 +47,9 @@ public class TrainAdminController {
         return new CommonResp<>(list);
     }
 
-//    @GetMapping("/gen-seat/{trainCode}")
-//    public CommonResp<Object> genSeat(@PathVariable String trainCode) {
-//        trainSeatService.genTrainSeat(trainCode);
-//        return new CommonResp<>();
-//    }
+    @GetMapping("/gen-seat/{trainCode}")
+    public CommonResp<Object> genSeat(@PathVariable String trainCode) {
+        trainSeatService.genTrainSeat(trainCode);
+        return new CommonResp<>();
+    }
 }

@@ -15,6 +15,6 @@ public class TestController {
 
     @GetMapping("/hello")
     public String testController(){
-        return "hello world!!!  Business!";
+        return "hello world!!!  Batch!";
     }
 }
