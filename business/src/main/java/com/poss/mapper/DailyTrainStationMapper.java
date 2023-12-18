@@ -3,8 +3,10 @@ package com.poss.mapper;
 import com.poss.domain.DailyTrainStation;
 import com.poss.domain.DailyTrainStationExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface DailyTrainStationMapper {
     long countByExample(DailyTrainStationExample example);
 
