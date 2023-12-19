@@ -16,6 +16,7 @@ public interface BusinessFeign {
     @GetMapping("/hello")
     String hello();
 
-    @GetMapping("/business/admin/daily-train/gen-daily/{date}")
+//    @GetMapping("/business/admin/daily-train/gen-daily/{date}")
+    @GetMapping("/gen-daily/{date}")
     CommonResp<Object> genDaily(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date date);
 }
